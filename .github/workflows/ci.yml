@@ -1,12 +1,20 @@
-name: CI
-
-on: [push]
+name: Dev Container CI
+on:
+  push:
+    paths:
+      - '.devcontainer/**'
+      - 'tests/**'
+      - 'main.py'
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: コードをチェックアウト
-        uses: actions/checkout@v4      # ← ここでリポジトリを取得
-      - name: テスト実行
-        run: pytest -q
+        uses: actions/checkout@v4
+
+      - name: Dev Container のビルド＆テスト
+        uses: devcontainers/ci@v0.2
+        with:
+          runCmd: pytest -q
+
