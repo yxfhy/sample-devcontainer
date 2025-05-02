@@ -16,6 +16,9 @@
     "ms-python.vscode-pylance"
   ],
   "forwardPorts": [8000],
-  "postCreateCommand": "pre-commit install",
+  "containerEnv": {
+    "PYTHONPATH": "/workspaces/sample-devcontainer"
+  },
+  "postCreateCommand": "pre-commit install && pytest -q | tee pytest-report.txt",
   "remoteUser": "vscode"
 }
